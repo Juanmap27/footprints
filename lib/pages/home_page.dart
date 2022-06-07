@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
                         "Usted esta por emitir un pedido de auxilio, desea continuar?",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.red,
+                          color: Colors.blue,
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,
