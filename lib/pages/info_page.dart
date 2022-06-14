@@ -8,10 +8,13 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle myStyle = const TextStyle(
-        fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.blueGrey);
+      fontSize: 22.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.green,
+      letterSpacing: 1,
+    );
 
     return Scaffold(
-      backgroundColor: Colors.grey[350],
       appBar: AppBar(
         elevation: 1,
         title: const Text("Pedido de Auxilio"),

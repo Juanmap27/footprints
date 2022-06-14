@@ -40,7 +40,7 @@ class _SliderButtonState extends State<SliderButton> {
           child: Text(
         "Deslice para enviar",
         style: TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

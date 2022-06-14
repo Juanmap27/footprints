@@ -16,29 +16,36 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey[200],
         body: SafeArea(
             child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 20.0,
+                ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    const Icon(
+                      Icons.android,
+                      size: 90,
+                    ),
                     const Center(
                       child: Text(
-                        "Usted esta por emitir un pedido de auxilio, desea continuar?",
+                        "Usted está por emitir un pedido de auxilio ¿Desea continuar?",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.green,
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    //const SizedBox(
+                    // height: 20,
+                    //),
                     const SliderButton(),
                     const SizedBox(
-                      height: 200,
-                    ),
+                        //height: 200,
+                        ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: GestureDetector(
@@ -65,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 ))));
   }
 
-  Future signOut() async {
+  signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }

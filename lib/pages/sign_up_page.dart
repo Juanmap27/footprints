@@ -1,18 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_footprint/pages/sign_up_page.dart';
 import 'package:flutter_footprint/widgets/custom_text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _contactController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+  final _newpassController = TextEditingController();
 
   @override
   void dispose() {
@@ -23,6 +26,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isComplete = _nameController.text.isNotEmpty &&
+        _phoneController.text.isNotEmpty &&
+        _contactController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _passController.text.isNotEmpty &&
+        _newpassController.text.isNotEmpty;
+
+    bool hasMatch = _passController.text == _newpassController.text;
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -30,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 const Text(
-                  "Iniciar Sesión",
+                  "Crear una cuenta",
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.green,
@@ -38,6 +50,30 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(
                   height: 30,
+                ),
+                CustomTextField(
+                  controller: _nameController,
+                  text: "Nombre y Apellido",
+                  icon: Icons.email,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomTextField(
+                  controller: _phoneController,
+                  text: "Telefono",
+                  icon: Icons.email,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomTextField(
+                  controller: _contactController,
+                  text: "Contacto de emergencia",
+                  icon: Icons.email,
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 CustomTextField(
                   controller: _emailController,
@@ -53,12 +89,20 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icons.password,
                 ),
                 const SizedBox(
+                  height: 20,
+                ),
+                CustomTextField(
+                  controller: _newpassController,
+                  text: "Repetir Contraseña",
+                  icon: Icons.password,
+                ),
+                const SizedBox(
                   height: 50,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: signIn,
+                    onTap: signUp,
                     child: Container(
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
@@ -82,25 +126,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "¿No tienes cuenta?, ",
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-                    ),
-                    GestureDetector(
-                      child: const Text("Crea una aqui",
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.green)),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) => const SignUpPage(),
-                        ),
-                      ),
-                    )
-                  ],
                 ),
               ],
             ),
@@ -110,8 +135,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(),
       password: _passController.text.trim(),
     );
